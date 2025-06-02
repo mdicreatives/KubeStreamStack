@@ -25,7 +25,7 @@ The platform consists of several key components:
 - **Apache Airflow**: Workflow orchestration
 - **PostgreSQL**: Metadata storage for Airflow
 
-For detailed architecture documentation, see [System Overview](docs/architecture/system-overview.md).
+For detailed architecture documentation, see [System Overview](documentation/architecture/system-overview.md).
 
 ## 🚀 Quick Start
 
@@ -34,7 +34,7 @@ To get KubeStreamStack up and running quickly:
 ### Prerequisites
 
 Ensure you have the necessary tools installed: Minikube, kubectl, Helm, Java 11, Maven, and Python 3.8+.
-For detailed prerequisites, see the [Prerequisites Guide](docs/deployment/prerequisites.md).
+For detailed prerequisites, see the [Prerequisites Guide](documentation/deployment/prerequisites.md).
 
 ### Installation
 
@@ -47,22 +47,22 @@ For detailed prerequisites, see the [Prerequisites Guide](docs/deployment/prereq
     ```bash
     ./scripts/platform-manager.sh start
     ```
-For detailed installation instructions and post-installation steps (like Airflow user creation), refer to the [Installation Guide](docs/deployment/installation.md).
+For detailed installation instructions and post-installation steps (like Airflow user creation), refer to the [Installation Guide](documentation/deployment/installation.md).
 
 ## 📚 Documentation
 
-- [System Architecture](docs/architecture/system-overview.md)
-- [Component Interaction](docs/architecture/component-interaction.md)
-- [Deployment Guide](docs/deployment/installation.md)
-- [Configuration Guide](docs/deployment/configuration.md)
-- [Development Guide](docs/development/local-setup.md)
+- [System Architecture](documentation/architecture/system-overview.md)
+- [Component Interaction](documentation/architecture/component-interaction.md)
+- [Deployment Guide](documentation/deployment/installation.md)
+- [Configuration Guide](documentation/deployment/configuration.md)
+- [Development Guide](documentation/development/local-setup.md)
 - [Examples](examples/README.md)
 
 ## 🛠 Development
 
 ### Local Development Setup
 
-Follow the [Local Setup Guide](docs/development/local-setup.md) for detailed instructions on setting up your development environment, building applications, and interacting with the platform.
+Follow the [Local Setup Guide](documentation/development/local-setup.md) for detailed instructions on setting up your development environment, building applications, and interacting with the platform.
 
 ### Building from Source
 
@@ -74,11 +74,11 @@ To build the platform components or custom applications from source:
     helm dependency update
     ```
 3.  Follow specific build instructions for individual components (e.g., `mvn clean package` for Java applications).
-Refer to the [Development Guide](docs/development/local-setup.md) for more details.
+Refer to the [Development Guide](documentation/development/local-setup.md) for more details.
 
 ## 🔧 Configuration
 
-The platform can be configured through Helm values. See the [Configuration Guide](docs/deployment/configuration.md) for details on how to customize your deployment.
+The platform can be configured through Helm values. See the [Configuration Guide](documentation/deployment/configuration.md) for details on how to customize your deployment.
 
 ## 📊 Monitoring
 
@@ -89,11 +89,11 @@ Access the various web UIs for monitoring and management. You might need to use 
 -   **Airflow UI**: `http://localhost:8082` (example port)
 -   **PostgreSQL**: Database port `5432` (not a web UI)
 
-For detailed access methods, refer to the [Installation Guide](docs/deployment/installation.md) and [Configuration Guide](docs/deployment/configuration.md).
+For detailed access methods, refer to the [Installation Guide](documentation/deployment/installation.md) and [Configuration Guide](documentation/deployment/configuration.md).
 
 ## 🔐 Security
 
-For security considerations and best practices, see the [Security Guide](docs/deployment/security.md).
+For security considerations and best practices, see the [Security Guide](documentation/deployment/security.md).
 
 ## 🤝 Contributing
 
