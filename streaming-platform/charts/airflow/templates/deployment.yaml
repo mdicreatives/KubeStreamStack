@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: airflow-webserver
+  namespace: {{ .Values.global.namespace }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: airflow
+      component: webserver
+  template:
+    metadata:
+      labels:
+        app: airflow
+        component: webserver
+    spec:
+      initContainers:
+      - name: init-db
+        image: apache/airflow:2.7.1
+        command: ["airflow", "db", "init"]
+        env:
+        - name: AIRFLOW__CORE__SQL_ALCHEMY_CONN
+          value: postgresql+psycopg2://airflow:airflow@airflow-postgres:5432/airflow
+      containers:
+      - name: webserver
+        image: apache/airflow:2.7.1
+        command: ["airflow", "webserver"]
+        ports:
+        - containerPort: 8080
+        resources:
+          {{- toYaml .Values.resources | nindent 12 }}
+        env:
+        - name: AIRFLOW__CORE__SQL_ALCHEMY_CONN
+          value: postgresql+psycopg2://airflow:airflow@airflow-postgres:5432/airflow
+        - name: AIRFLOW__CORE__EXECUTOR
+          value: LocalExecutor
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: airflow-scheduler
+  namespace: {{ .Values.global.namespace }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: airflow
+      component: scheduler
+  template:
+    metadata:
+      labels:
+        app: airflow
+        component: scheduler
+    spec:
+      containers:
+      - name: scheduler
+        image: apache/airflow:2.7.1
+        command: ["airflow", "scheduler"]
+        resources:
+          {{- toYaml .Values.resources | nindent 12 }}
+        env:
+        - name: AIRFLOW__CORE__SQL_ALCHEMY_CONN
+          value: postgresql+psycopg2://airflow:airflow@airflow-postgres:5432/airflow
+        - name: AIRFLOW__CORE__EXECUTOR
+          value: LocalExecutor 

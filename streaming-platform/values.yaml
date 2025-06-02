@@ -1,0 +1,47 @@
+global:
+  namespace: dev-env
+
+kafka:
+  enabled: true
+  replicaCount: 1
+  resources:
+    limits:
+      memory: "1Gi"
+      cpu: "500m"
+    requests:
+      memory: "512Mi"
+      cpu: "250m"
+  persistence:
+    size: "5Gi"
+
+kafkaui:
+  enabled: true
+  resources:
+    limits:
+      memory: "512Mi"
+      cpu: "200m"
+    requests:
+      memory: "256Mi"
+      cpu: "100m"
+
+airflow:
+  enabled: true
+  resources:
+    limits:
+      memory: "2Gi"
+      cpu: "1000m"
+    requests:
+      memory: "1Gi"
+      cpu: "500m"
+  persistence:
+    size: "10Gi"
+
+flink:
+  enabled: true
+  resources:
+    limits:
+      memory: "2Gi"
+      cpu: "1000m"
+    requests:
+      memory: "1Gi"
+      cpu: "500m" 

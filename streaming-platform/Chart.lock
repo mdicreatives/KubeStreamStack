@@ -1,0 +1,15 @@
+dependencies:
+- name: kafka
+  repository: file://charts/kafka
+  version: 0.1.0
+- name: kafkaui
+  repository: file://charts/kafkaui
+  version: 0.1.0
+- name: flink
+  repository: file://charts/flink
+  version: 0.1.0
+- name: airflow
+  repository: file://charts/airflow
+  version: 0.1.0
+digest: sha256:6ec2c901973d69be674e211db36a337c34cb2adc458cdff03fb551bdcd8435e1
+generated: "2025-02-18T16:19:09.226346636+04:00"

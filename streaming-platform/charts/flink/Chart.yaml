@@ -1,0 +1,6 @@
+apiVersion: v2
+name: flink
+description: Apache Flink Helm chart
+type: application
+version: 0.1.0
+appVersion: "1.17.0" 
