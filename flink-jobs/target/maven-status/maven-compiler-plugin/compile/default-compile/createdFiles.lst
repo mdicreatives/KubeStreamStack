@@ -1,5 +1,0 @@
-com/rental/streaming/SpeedResult.class
-com/rental/streaming/GpsData.class
-com/rental/streaming/GpsStreamProcessor.class
-com/rental/streaming/AverageSpeedAggregator.class
-com/rental/streaming/SpeedAccumulator.class
