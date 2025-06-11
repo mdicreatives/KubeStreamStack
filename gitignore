@@ -1,0 +1,2 @@
+# Ignore Helm chart archives
+*.tgz

@@ -3,7 +3,7 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 [![CI/CD](https://github.com/mdicreatives/KubeStreamStack/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/mdicreatives/KubeStreamStack/actions/workflows/ci-cd.yml)
 
-A production-ready streaming platform built with Apache Kafka, Flink, and Airflow, designed for real-time data processing applications.
+A Development-ready streaming platform built with Apache Kafka, Flink, and Airflow, designed for real-time data processing applications.
 
 ## 🌟 Features
 
