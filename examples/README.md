@@ -11,6 +11,54 @@ This example showcases a simple Apache Flink application that reads messages fro
 *   KubeStreamStack platform running (Kafka, Flink, etc.)
 *   Python 3.x and `pip` for running producer/consumer scripts.
 *   Java 11 and Maven 3.8+ (if you plan to build the Flink application locally).
+*   Poetry (recommended) or venv for Python dependency management.
+
+### Setting up Python Environment
+
+#### Option 1: Using Poetry (Recommended)
+
+1. Install Poetry if you haven't already:
+   ```bash
+   curl -sSL https://install.python-poetry.org | python3 -
+   ```
+
+2. Navigate to the examples directory:
+   ```bash
+   cd examples
+   ```
+
+3. Initialize Poetry project:
+   ```bash
+   poetry init
+   ```
+   - Accept the defaults for most prompts
+   - Add `kafka-python` as a dependency when prompted
+   - Or add it later using: `poetry add kafka-python`
+
+4. Activate the virtual environment:
+   ```bash
+   poetry shell
+   ```
+
+#### Option 2: Using venv
+
+1. Create a virtual environment:
+   ```bash
+   python -m venv venv
+   ```
+
+2. Activate the virtual environment:
+   ```bash
+   # On Linux/macOS
+   source venv/bin/activate
+   # On Windows
+   .\venv\Scripts\activate
+   ```
+
+3. Install dependencies:
+   ```bash
+   pip install kafka-python
+   ```
 
 ### 1. Ensure KubeStreamStack is Running
 
@@ -79,14 +127,19 @@ This option would involve creating a dedicated Helm chart for your Flink applica
 
 This script will send sample messages to the `input-topic`.
 
-1.  Install the `kafka-python` library:
+1.  Make sure you're in your Poetry environment or venv:
     ```bash
-    pip install kafka-python
+    # If using Poetry
+    poetry shell
+    # If using venv
+    source venv/bin/activate  # or .\venv\Scripts\activate on Windows
     ```
+
 2.  Navigate to the producer script directory:
     ```bash
-    cd ../kafka-producer
+    cd kafka-producer
     ```
+
 3.  Run the producer:
     ```bash
     python producer.py
@@ -97,14 +150,19 @@ This script will send sample messages to the `input-topic`.
 
 This script will read and display messages from the `output-topic`.
 
-1.  Install the `kafka-python` library (if not already installed):
+1.  Make sure you're in your Poetry environment or venv:
     ```bash
-    pip install kafka-python
+    # If using Poetry
+    poetry shell
+    # If using venv
+    source venv/bin/activate  # or .\venv\Scripts\activate on Windows
     ```
+
 2.  Navigate to the consumer script directory:
     ```bash
-    cd ../kafka-consumer
+    cd kafka-consumer
     ```
+
 3.  Run the consumer:
     ```bash
     python consumer.py

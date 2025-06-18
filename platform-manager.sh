@@ -78,9 +78,30 @@ start_environment() {
     "$MINIKUBE_CMD" addons enable storage-provisioner
     "$MINIKUBE_CMD" addons enable default-storageclass
 
-    print_status "Creating namespace 'dev-env' if it doesn't exist..."
-    # Make namespace creation idempotent
-    "$KUBECTL_CMD" get namespace dev-env >/dev/null 2>&1 || "$KUBECTL_CMD" create namespace dev-env
+    print_status "Checking namespace 'dev-env'..."
+    # Check if namespace exists
+    if ! "$KUBECTL_CMD" get namespace dev-env >/dev/null 2>&1; then
+        print_status "Creating namespace 'dev-env'..."
+        if ! "$KUBECTL_CMD" create namespace dev-env; then
+            print_error "Failed to create namespace 'dev-env'. Exiting..."
+            exit 1
+        fi
+        # Wait for namespace to be ready
+        print_status "Waiting for namespace 'dev-env' to be ready..."
+        for i in {1..30}; do
+            if "$KUBECTL_CMD" get namespace dev-env >/dev/null 2>&1; then
+                print_status "Namespace 'dev-env' created successfully."
+                break
+            fi
+            if [ $i -eq 30 ]; then
+                print_error "Timeout waiting for namespace 'dev-env' to be ready. Exiting..."
+                exit 1
+            fi
+            sleep 2
+        done
+    else
+        print_status "Namespace 'dev-env' already exists."
+    fi
 
     print_status "Adding Helm repositories..."
     # Add necessary Helm repositories for dependent charts (e.g., Kafka, Airflow)
@@ -194,17 +215,19 @@ check_status() {
     
     echo -e "\nMinikube status:"
     "$MINIKUBE_CMD" status
-    
-    echo -e "\nNamespace status:"
-    "$KUBECTL_CMD" get ns dev-env || echo "Namespace 'dev-env' does not exist."
-    
-    echo -e "\nPod status in 'dev-env' namespace:"
-    "$KUBECTL_CMD" get pods -n dev-env || echo "No pods found in 'dev-env' namespace or namespace does not exist."
-    
-    echo -e "\nService status in 'dev-env' namespace:"
-    "$KUBECTL_CMD" get svc -n dev-env || echo "No services found in 'dev-env' namespace or namespace does not exist."
+    if "$MINIKUBE_CMD" status | grep -q "Running"; then
+        echo -e "\nNamespace status:"
+        "$KUBECTL_CMD" get ns dev-env || echo "Namespace 'dev-env' does not exist."
+        
+        echo -e "\nPod status in 'dev-env' namespace:"
+        "$KUBECTL_CMD" get pods -n dev-env || echo "No pods found in 'dev-env' namespace or namespace does not exist."
+        
+        echo -e "\nService status in 'dev-env' namespace:"
+        "$KUBECTL_CMD" get svc -n dev-env || echo "No services found in 'dev-env' namespace or namespace does not exist."
+    else
+        print_warning "Minikube is not running. Skipping namespace checks."
+    fi
 }
-
 # Main script
 main() {
     # Check required commands and get their paths
