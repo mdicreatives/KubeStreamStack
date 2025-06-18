@@ -17,17 +17,30 @@ This example showcases a simple Apache Flink application that reads messages fro
 
 #### Option 1: Using Poetry (Recommended)
 
-1. Install Poetry if you haven't already:
+1. Install Poetry using the official installer:
    ```bash
+   # Install Poetry
    curl -sSL https://install.python-poetry.org | python3 -
+
+   # Add Poetry to your PATH (if not already done by the installer)
+   echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
+   source ~/.bashrc
+
+   # Verify installation
+   poetry --version
    ```
 
-2. Navigate to the examples directory:
+2. Configure Poetry to create virtual environments in the project directory:
+   ```bash
+   poetry config virtualenvs.in-project true
+   ```
+
+3. Navigate to the examples directory:
    ```bash
    cd examples
    ```
 
-3. Initialize Poetry project:
+4. Initialize Poetry project:
    ```bash
    poetry init
    ```
@@ -35,9 +48,15 @@ This example showcases a simple Apache Flink application that reads messages fro
    - Add `kafka-python` as a dependency when prompted
    - Or add it later using: `poetry add kafka-python`
 
-4. Activate the virtual environment:
+5. Activate the virtual environment:
    ```bash
    poetry shell
+   ```
+
+6. Verify the environment:
+   ```bash
+   # Should show the path to your project's virtual environment
+   poetry env info
    ```
 
 #### Option 2: Using venv

@@ -1,2 +1,41 @@
-# Ignore Helm chart archives
+# Python virtual environments
+.venv/
+venv/
+env/
+ENV/
+# Poetry virtualenvs (if not in-project, but just in case)
+# (Poetry in-project venv is .venv/)
+# pipenv
+Pipfile.lock
+
+# Python bytecode
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Maven build artifacts
+target/
+*.log
+*.class
+
+# Flink build artifacts
+flink-dist/
+flink-*.jar
+
+# Helm chart packages
 *.tgz
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# VSCode and other editor settings
+.vscode/
+.idea/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Misc
+*.swp
+*.swo

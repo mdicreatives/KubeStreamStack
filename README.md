@@ -11,8 +11,7 @@ A Development-ready streaming platform built with Apache Kafka, Flink, and Airfl
 - Stream processing with Apache Flink
 - Workflow orchestration with Apache Airflow
 - Web-based monitoring interfaces
-- Automated deployment and management
-- Scalable and production-ready architecture
+- Automated deployment and management(will be added)
 - Easy integration with custom applications
 
 ## 🏗 Architecture
