@@ -133,6 +133,7 @@ start_environment() {
     "$KUBECTL_CMD" port-forward svc/flink-jobmanager 8081:8081 -n dev-env &
     "$KUBECTL_CMD" port-forward svc/airflow-webserver 8082:8080 -n dev-env &
     "$KUBECTL_CMD" port-forward svc/airflow-postgres 5432:5432 -n dev-env &
+    "$KUBECTL_CMD" port-forward svc/kafka 9094:9094 -n dev-env & 
     # Check if 'kafka' service needs external access (e.g., using a NodePort or LoadBalancer for 9094)
     # The default bitnami Kafka chart typically exposes 9092 internally.
     # If 9094 is for external access, ensure it's configured in your Helm chart values for Kafka.

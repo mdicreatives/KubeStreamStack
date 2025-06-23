@@ -4,7 +4,7 @@ import json
 # Kafka broker address (adjust if your Kafka is not on localhost:9092)
 # You might need to port-forward Kafka service if running in Minikube:
 # kubectl port-forward service/kafka 9092:9092
-KAFKA_BROKER = 'localhost:9092'
+KAFKA_BROKER = 'localhost:9094'
 TOPIC_NAME = 'output-topic'
 GROUP_ID = 'flink-example-consumer-group'
 

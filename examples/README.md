@@ -85,7 +85,7 @@ Make sure your KubeStreamStack environment is up and running. You can start it u
 
 ```bash
 cd ../.. # Navigate back to the root of the KubeStreamStack project
-./scripts/platform-manager.sh start
+./platform-manager.sh start
 ```
 
 ### 2. Create Kafka Topics
@@ -137,8 +137,21 @@ kubectl exec -it <kafka-broker-pod-name> -- kafka-topics.sh --create --topic out
     flink run -m <flink-jobmanager-ip>:8081 target/flink-kafka-processor-1.0-SNAPSHOT.jar
     ```
     *Note: The `flink` client command needs to be installed locally or you can use `kubectl exec` into a Flink client pod if available in your setup.*
+#### Option B: Submitting the Flink Job via REST API
+You can submit the Flink job JAR directly to the Flink cluster using the REST API and curl.
+Assuming your Flink JobManager REST API is accessible at http://localhost:8081 and your JAR is built at target/flink-kafka-processor-1.0-SNAPSHOT.jar:
+```bash
+# 1. Upload the JAR to the Flink JobManager
+JAR_ID=$(curl -X POST -H "Expect:" -F "jarfile=@target/flink-kafka-processor-1.0-SNAPSHOT.jar" http://localhost:8081/jars/upload | jq -r .filename | awk -F'/' '{print $NF}')
 
-#### Option B: Deploy via Helm (For Production-like Deployment)
+# 2. Submit the job
+curl -X POST "http://localhost:8081/jars/$JAR_ID/run"
+```
+You need jq installed for parsing the JSON response. Install it with sudo apt install jq if needed.
+Adjust the JAR path and REST API URL if your setup is different.
+You can also use the Flink Web UI at http://localhost:8081 to upload and run the JAR interactively.
+
+#### Option C: Deploy via Helm (For Production-like Deployment)
 
 This option would involve creating a dedicated Helm chart for your Flink application, which is beyond the scope of this basic example. However, in a production setup, you would containerize your Flink application and deploy it as a Flink job via a custom Helm chart or Flink Kubernetes Operator.
 

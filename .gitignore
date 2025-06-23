@@ -39,3 +39,8 @@ Thumbs.db
 # Misc
 *.swp
 *.swo
+
+examples/*log*
+examples/*.lock
+examples/pyproject.toml
+.gitignore
