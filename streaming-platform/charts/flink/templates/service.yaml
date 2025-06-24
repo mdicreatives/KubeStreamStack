@@ -8,6 +8,8 @@ spec:
   ports:
   - name: rpc
     port: 6123
+  - name: blob-server
+    port: 6124
   - name: ui
     port: 8081
   selector:
